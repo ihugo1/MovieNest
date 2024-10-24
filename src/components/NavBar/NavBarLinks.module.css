@@ -1,0 +1,30 @@
+.navbar-links{
+  display: flex;
+  gap: 0 var(--spacing-l);
+  .navbar-link{
+    display: flex;
+    gap: var(--spacing-s);
+    color: var(--accent);
+    text-transform: uppercase;
+    transition: color 0.5s ease;
+  }
+  .navbar-link:hover{
+    color: var(--accent-focus);
+  }
+}
+
+/*-------------------------------------------------------
+# Responsive
+---------------------------------------------------------*/
+
+@media (max-width: 1024px)  {
+  .navbar-links{
+    width: 100%;
+    padding: 0;
+    justify-content: space-around;
+    .navbar-link{
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}

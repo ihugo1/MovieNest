@@ -1,0 +1,46 @@
+.searchbar-container {
+  height: 50%;
+  width: 60%;
+  /*acá irán los resultados*/
+  .searchbar {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: var(--border-radius);
+    background-color: var(--secondary);
+    .input {
+      width: 100%;
+      padding: 0 var(--spacing-l);
+      color: var(--text-light);
+    }
+    .icon-container {
+      height: 100%;
+      width: 20%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .icon {
+        color: var(--accent);
+      }
+    }
+  }
+}
+
+/*-------------------------------------------------------
+# Responsive
+---------------------------------------------------------*/
+
+@media (max-width: 1024px) {
+  .searchbar-container {
+    width: 70%;
+    .searchbar {
+      .input{
+        width: 100%;
+      }
+      .icon{
+        display: none;
+      }
+    }
+  }
+}

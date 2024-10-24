@@ -13,7 +13,7 @@
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
   font-size: var(--font-m);
-  font-weight: var(--font-regular);
+  font-weight: var(--font-medium);
 }
 button {
   background: none;
@@ -26,6 +26,13 @@ a {
 }
 ul, ol {
   list-style: none;
+}
+input{
+  border: none;
+  background-color: var(--transparent);
+}
+input:focus{
+  outline: none;
 }
 
 /*-------------------------------------------------------
@@ -52,6 +59,7 @@ ul, ol {
 ---------------------------------------------------------*/
 
 :root {
+  --spacing-xs: 0.25rem;
   --spacing-s: 0.5rem; 
   --spacing-m: 1rem;      
   --spacing-l: 1.5rem;    
@@ -66,5 +74,16 @@ ul, ol {
 :root {
   --primary: #1a2731;   
   --secondary: #2b373f; 
-  --accent: #006128;    
+  --accent: #017e35;   
+  --accent-focus: #01bb4e;
+  --transparent: #00000000; 
+  --text-light: #d4dde4;
+  --text-dark: #12161a;  
+}
+
+/*-------------------------------------------------------
+# Borders
+---------------------------------------------------------*/
+:root {
+  --border-radius: 15px
 }

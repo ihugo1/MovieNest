@@ -1,0 +1,21 @@
+.featured-movies{
+  background-color: var(--primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-l);
+  .title{
+    color: var(--text-light);
+    text-transform: uppercase;
+    font-size: var(--font-xxl);
+    margin: var(--spacing-s);
+  }
+  .container{
+    border-top: 2px solid var(--accent);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: var(--spacing-l) 0;
+    gap: var(--spacing-l);
+  }
+}

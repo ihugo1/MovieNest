@@ -1,0 +1,28 @@
+button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius);
+  gap: var(--spacing-s);
+}
+.primary{
+  background-color: var(--accent);
+  border: 2px solid var(--accent);
+  color: var(--text-light);
+}
+.primary:hover{
+  background-color: var(--transparent);
+  border: 2px solid var(--accent);
+  color: var(--accent);
+}
+.small{
+  min-width: 120px;
+  height: 40px;
+  .icon{
+    font-size: var(--font-m);   
+  }
+  .label{
+    text-transform: uppercase;
+    font-size: var(--font-m);
+  }
+}

@@ -34,3 +34,16 @@ export const getPopularMovies = async () => {
     console.error(error);
   }
 };
+/*-------------------------------------------------------
+# Get Top Rated
+---------------------------------------------------------*/
+export const getTopRatedMovies = async () => {
+  const SEARCH_STRING = `${BASE_URL}/movie/top_rated`;
+  try {
+    const RESPONSE = await fetch(SEARCH_STRING, OPTIONS);
+    const LIST = await RESPONSE.json();
+    return LIST.results;
+  } catch (error) {
+    console.error(error);
+  }
+};

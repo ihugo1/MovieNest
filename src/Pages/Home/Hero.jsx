@@ -10,10 +10,6 @@ export const Hero = () => {
     fetchMovie();
   }, []);
 
-  useEffect(() => {
-    console.log(movie);
-  }, [movie]);
-
   return (
     <div className={style["hero"]}>
       <div className={style["background"]}>

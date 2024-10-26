@@ -2,8 +2,13 @@ import React from "react";
 import style from "./MovieCard.module.css";
 import { FaPlay, FaBookmark } from "react-icons/fa6";
 import { Button } from "../Button/Button";
+import { useNavigate } from "react-router-dom";
 
 export const MovieCard = ({ id, name, poster_path }) => {
+
+  const navigate = useNavigate();
+  const handleClick = () => navigate(`movie/${id}`);
+
   return (
     <div className={style["movie-card"]}>
       <div className={style["background"]}>
@@ -17,6 +22,7 @@ export const MovieCard = ({ id, name, poster_path }) => {
             type="primary"
             size={"small"} 
             icon={FaPlay}
+            onClick={handleClick}
           />
           <Button 
             text="save" 

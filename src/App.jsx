@@ -1,12 +1,17 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { NavBar } from "./components/NavBar/NavBar";
 import { Home } from "./Pages/Home/Home";
+import { Movie } from "./Pages/Movie/Movie";
 
 export const App = () => {
-  return( 
-    <div>
+  return (
+    <Router>
       <NavBar />
-      <Home/>
-    </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/movie/:id" element={<Movie />} />
+      </Routes>
+    </Router>
   );
 };

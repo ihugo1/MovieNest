@@ -47,3 +47,16 @@ export const getTopRatedMovies = async () => {
     console.error(error);
   }
 };
+/*-------------------------------------------------------
+# Get Movie Info
+---------------------------------------------------------*/
+export const getMovieInfo = async (id) => {
+  const SEARCH_STRING = `${BASE_URL}/movie/${id}`;
+  try {
+    const RESPONSE = await fetch(SEARCH_STRING, OPTIONS);
+    const MOVIE = await RESPONSE.json();
+    return MOVIE;
+  } catch (error) {
+    console.error(error);
+  }
+};

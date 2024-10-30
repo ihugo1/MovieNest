@@ -18,7 +18,7 @@ export const getMovieList = async (query) => {
     const LIST = await RESPONSE.json();
     return LIST.results;
   } catch (error) {
-    console.error(error);
+    seterr
   }
 };
 /*-------------------------------------------------------
@@ -56,6 +56,19 @@ export const getMovieInfo = async (id) => {
     const RESPONSE = await fetch(SEARCH_STRING, OPTIONS);
     const MOVIE = await RESPONSE.json();
     return MOVIE;
+  } catch (error) {
+    console.error(error);
+  }
+};
+/*-------------------------------------------------------
+# Get Movie Images
+---------------------------------------------------------*/
+export const getMovieVideos = async (id) => {
+  const SEARCH_STRING = `${BASE_URL}movie/${id}/videos`;
+  try {
+    const RESPONSE = await fetch(SEARCH_STRING, OPTIONS);
+    const IMAGES = await RESPONSE.json();
+    return IMAGES;
   } catch (error) {
     console.error(error);
   }

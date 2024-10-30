@@ -1,41 +1,35 @@
 import React from "react";
 import style from "./FeaturedMovies.module.css";
-import { useEffect, useState } from "react";
-import { getPopularMovies, getTopRatedMovies } from "../../services/api";
 import { MovieCard } from "../MovieCard/MovieCard";
-import { FaFilm, FaCircleUser, FaCircleInfo } from "react-icons/fa6";
+import { useFetchData } from "../../hooks/useFetchData";
 
 export const FeaturedMovies = ({ type }) => {
-  const [movies, setMovies] = useState([]);
+  const searchQuery = `movie/${type}`;
+  const { data, loading, error } = useFetchData(searchQuery);
 
-  useEffect(() => {
-    const fetchMovie = async () => {
-      if (type === "popular") {
-        setMovies((await getPopularMovies()).slice(0, 4));
-      } else if (type === "top rated") {
-        setMovies((await getTopRatedMovies()).slice(0, 4));
-      }
-    };
-    fetchMovie();
-  }, []);
-
-  return (
-    <section className={style["featured-movies"]}>
-      <h3 className={style['title']}>{type}</h3>
-      <ul className={style['container']}>
-        {movies && movies.length > 0 ? (
-          movies.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              id={movie.id}
-              name={movie.title}
-              poster_path={movie.poster_path}
-            />
-          ))
-        ) : (
-          <span>Loading...</span>
-        )}
-      </ul>
-    </section>
-  );
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+  if (error) {
+    return <p>Error: {error.message || "Something went wrong."}</p>;
+  }
+  if (data) {
+    const movies = data.results ? data.results.slice(0, 8) : [];
+    return (
+      <section className={style["featured-movies"]}>
+        <h3 className={style["title"]}>{type.replace(/_/g, " ")}</h3>
+        <ul className={style["container"]}>
+          {movies &&
+            movies.map((movie) => (
+              <MovieCard
+                key={movie.id}
+                id={movie.id}
+                name={movie.title}
+                poster_path={movie.poster_path}
+              />
+            ))}
+        </ul>
+      </section>
+    );
+  }
 };

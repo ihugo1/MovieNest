@@ -8,7 +8,7 @@ export const Home = () => {
     <div className={style["home-page"]}>
       <Hero />
       <FeaturedMovies type="popular"/>
-      <FeaturedMovies type="top rated"/>
+      <FeaturedMovies type="top_rated"/>
     </div>
   );
 };

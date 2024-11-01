@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const BASE_URL = "https://api.themoviedb.org/3/";
 const OPTIONS = {
@@ -10,34 +10,78 @@ const OPTIONS = {
   },
 };
 
-export const useFetchData = (endpoint) => {
-  const [data, setData] = useState([]);
+export const useFetchData = () => {
+  const [search, setSearch] = useState([]);
+  const [featured, setFeatured] = useState([]);
+  const [movie, setMovie] = useState({});
+  const [genres, setGenres] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
 
-  const fetchData = async () => {
-    if (!endpoint) return;
+  const fetchData = async (url, callback) => {
     setLoading(true);
-    setError(false);
+    setError(null);
     try {
-      const response = await fetch(BASE_URL + endpoint, OPTIONS);
-      if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+      const response = await fetch(url, OPTIONS);
+      if (!response.ok) throw new Error("Error en la solicitud");
       const data = await response.json();
-      setData(data);
-    } catch (error) {
-      setError(true);
+      callback(data);
+    } catch (err) {
+      setError(err.message);
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    if (endpoint) {
-      fetchData();
-    } else {
-      setData([]);
-    }
-  }, [endpoint]);
+  const fetchSearch = (query) => {
+    if (!query) return setSearch([]);
+    fetchData(`${BASE_URL}search/movie?query=${query}`, (data) =>
+      setSearch(data.results)
+    );
+  };
 
-  return { data, loading, error };
+  const fetchFeatured = (type) => {
+    if (!type) return setSearch([]);
+    fetchData(`${BASE_URL}movie/${type}`, (data) =>
+      setFeatured(data.results)
+    );
+  };
+
+  const fetchMovie = (id) => {
+    if (!id) return setMovie([]);
+    fetchData(`${BASE_URL}movie/${id}`, setMovie);
+  };
+
+  const fetchGenres = () => {
+    fetchData(`${BASE_URL}genre/movie/list`, (data) => setGenres(data.genres));
+  };
+
+  const fetchFilteredSearch = (query = null, genreId = null) => {
+    const url = query
+      ? `${BASE_URL}search/movie?query=${query}`
+      : `${BASE_URL}discover/movie?page=1&with_genres=${genreId}`;
+    fetchData(url, (data) => {
+      setSearch(
+        genreId
+          ? data.results.filter((result) =>
+              result.genre_ids.includes(parseInt(genreId))
+            )
+          : data.results
+      );
+    });
+  };
+
+  return {
+    search,
+    featured,
+    movie,
+    genres,
+    fetchSearch,
+    fetchFeatured,
+    fetchMovie,
+    fetchGenres,
+    fetchFilteredSearch,
+    loading,
+    error,
+  };
 };

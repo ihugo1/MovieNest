@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export const MovieCard = ({ id, name, poster_path }) => {
 
   const navigate = useNavigate();
-  const handleClick = () => navigate(`movie/${id}`);
+  const handleClick = () => navigate(`/movie/${id}`);
 
   return (
     <div className={style["movie-card"]}>

@@ -3,7 +3,7 @@ import { FaFilm, FaCircleUser, FaCircleInfo } from "react-icons/fa6";
 
 export const NavBarLinks = () => {
   const NAVBARLINKS = [
-    { name: "catalog", icon: <FaFilm />, to: "#" },
+    { name: "catalog", icon: <FaFilm />, to: "/catalog" },
     { name: "profile", icon: <FaCircleUser />, to: "#" },
     { name: "about", icon: <FaCircleInfo />, to: "#" },
   ];

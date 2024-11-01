@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "./FeaturedMovies.module.css";
 import { MovieCard } from "../MovieCard/MovieCard";
 import { useFetchData } from "../../hooks/useFetchData";
 
 export const FeaturedMovies = ({ type }) => {
-  const searchQuery = `movie/${type}`;
-  const { data, loading, error } = useFetchData(searchQuery);
+  const { featured, loading, error, fetchFeatured } = useFetchData();
+
+  useEffect(()=>{
+    fetchFeatured(type)
+  }, [])
 
   if (loading) {
     return <p>Loading...</p>;
@@ -13,8 +16,8 @@ export const FeaturedMovies = ({ type }) => {
   if (error) {
     return <p>Error: {error.message || "Something went wrong."}</p>;
   }
-  if (data) {
-    const movies = data.results ? data.results.slice(0, 8) : [];
+  if (featured) {
+    const movies = featured ? featured.slice(0, 8) : [];
     return (
       <section className={style["featured-movies"]}>
         <h3 className={style["title"]}>{type.replace(/_/g, " ")}</h3>

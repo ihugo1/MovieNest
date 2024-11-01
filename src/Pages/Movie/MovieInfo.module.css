@@ -1,0 +1,89 @@
+.movie-info {
+  height: 100vh;
+  width: 100%;
+  .background {
+    z-index: -10;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .movie-info-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background-color: #0f1f16e8;
+    .movie-info-left {
+      width: 40%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: auto;
+        height: 70%;
+        box-shadow: var(--box-shadow);
+      }
+    }
+    .movie-info-right {
+      width: 60%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--spacing-xl);
+      padding: var(--spacing-xl);
+      .title {
+        font-size: var(--font-xxl);
+        color: var(--text-light);
+        font-weight: var(--font-bold);
+      }
+      .genres {
+        display: flex;
+        gap: var(--spacing-s);
+        .genre {
+          background-color: var(--secondary);
+          border-radius: var(--border-radius);
+          padding: var(--spacing-s);
+          color: var(--accent);
+        }
+      }
+      .overview {
+        text-align: justify;
+        color: var(--text-light);
+        font-weight: var(--font-regular);
+      }
+      .language,
+      .runtime,
+      .release-date {
+        color: var(--text-light);
+        font-weight: var(--font-light);
+      }
+    }
+  }
+}
+
+/*-------------------------------------------------------
+# Responsive
+---------------------------------------------------------*/
+
+@media (max-width: 1024px) {
+  .movie-info {
+    .movie-info-container {
+      flex-direction: column;
+      align-items: center;
+      .movie-info-left {
+        width: 100%;
+      }
+      .movie-info-right {
+        width: 100%;
+        background-color: var(--primary);
+      }
+    }
+  }
+}

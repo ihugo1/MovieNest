@@ -15,6 +15,7 @@ export const useFetchData = () => {
   const [featured, setFeatured] = useState([]);
   const [movie, setMovie] = useState({});
   const [genres, setGenres] = useState([]);
+  const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -56,11 +57,12 @@ export const useFetchData = () => {
     fetchData(`${BASE_URL}genre/movie/list`, (data) => setGenres(data.genres));
   };
 
-  const fetchFilteredSearch = (query = null, genreId = null) => {
+  const fetchFilteredSearch = (query = null, genreId = null, page=1) => {
     const url = query
-      ? `${BASE_URL}search/movie?query=${query}`
-      : `${BASE_URL}discover/movie?page=1&with_genres=${genreId}`;
+      ? `${BASE_URL}search/movie?query=${query}&page=${page}`
+      : `${BASE_URL}discover/movie?page=1&with_genres=${genreId}&page=${page}`;
     fetchData(url, (data) => {
+      setTotalPages(data.total_pages)
       setSearch(
         genreId
           ? data.results.filter((result) =>
@@ -80,6 +82,7 @@ export const useFetchData = () => {
     fetchFeatured,
     fetchMovie,
     fetchGenres,
+    totalPages,
     fetchFilteredSearch,
     loading,
     error,

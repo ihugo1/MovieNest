@@ -2,6 +2,8 @@ import style from "./Catalog.module.css";
 import { SearchBar } from "./SearchBar";
 import { MovieGrid } from "./MovieGrid";
 import { useFetchData } from "../../hooks/useFetchData";
+import { Button } from "../../components/Button/Button";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 import React, { useEffect, useState } from "react";
 
 export const Catalog = () => {
@@ -13,10 +15,6 @@ export const Catalog = () => {
     fetchGenres();
   }, []);
 
-  useEffect(() => {
-    console.log(search)
-  }, [search]);
-
   const handleClickButton = () => fetchFilteredSearch(query, genreId);
 
   return (
@@ -25,11 +23,17 @@ export const Catalog = () => {
         genres={genres}
         setQuery={setQuery}
         setGenreId={setGenreId}
-        onClick={handleClickButton}
+        searchButton={
+          <Button
+            text="Search"
+            type="primary"
+            size={"small"}
+            icon={FaMagnifyingGlass}
+            onClick={handleClickButton}
+          />
+        }
       />
-      {(search.length>0)
-      ? <MovieGrid movies={search} /> 
-      : null}
+      <MovieGrid movies={search} />
     </div>
   );
 };

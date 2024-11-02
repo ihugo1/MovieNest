@@ -12,7 +12,7 @@ export const MovieCard = ({ id, name, poster_path }) => {
   return (
     <div className={style["movie-card"]}>
       <div className={style["background"]}>
-        <img src={`https://image.tmdb.org/t/p/original/${poster_path}`} />
+        <img src={`https://image.tmdb.org/t/p/w400/${poster_path}`} />
       </div>
       <div className={style["content"]}>
         <span className={style['title']}>{name}</span>

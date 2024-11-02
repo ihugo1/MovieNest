@@ -1,7 +1,6 @@
 import style from "./SearchBar.module.css";
 import { Button } from "../../components/Button/Button";
-
-export const SearchBar = ({ genres, setQuery, setGenreId, onClick }) => {
+export const SearchBar = ({ genres, setQuery, setGenreId, searchButton }) => {
   return (
     <div className={style["search-bar"]}>
       <input
@@ -25,7 +24,7 @@ export const SearchBar = ({ genres, setQuery, setGenreId, onClick }) => {
             ))
           : null}
       </select>
-      <button onClick={onClick}>Search</button>
+      {searchButton}
     </div>
   );
 };

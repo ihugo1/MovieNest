@@ -3,5 +3,13 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--spacing-l);
-
+}
+.empty-grid{
+  height: 60vh; 
+  text-align: center;
+  padding: var(--spacing-xl);
+  p{
+    font-size: var(--font-xl);
+    color: var(--text-light);
+  }
 }

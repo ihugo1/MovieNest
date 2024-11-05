@@ -15,6 +15,7 @@ export const useFetchData = () => {
   const [featured, setFeatured] = useState([]);
   const [movie, setMovie] = useState({});
   const [genres, setGenres] = useState([]);
+  const [videos, setVideos] = useState([]);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -73,17 +74,23 @@ export const useFetchData = () => {
     });
   };
 
+  const fetchVideos = (id) => {
+    fetchData(`${BASE_URL}movie/${id}/videos`, setVideos);
+  }
+
   return {
     search,
     featured,
     movie,
     genres,
+    videos,
     fetchSearch,
     fetchFeatured,
     fetchMovie,
     fetchGenres,
     totalPages,
     fetchFilteredSearch,
+    fetchVideos,
     loading,
     error,
   };

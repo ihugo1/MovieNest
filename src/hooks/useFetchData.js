@@ -44,9 +44,7 @@ export const useFetchData = () => {
 
   const fetchFeatured = (type) => {
     if (!type) return setSearch([]);
-    fetchData(`${BASE_URL}movie/${type}`, (data) =>
-      setFeatured(data.results)
-    );
+    fetchData(`${BASE_URL}movie/${type}`, (data) => setFeatured(data.results));
   };
 
   const fetchMovie = (id) => {

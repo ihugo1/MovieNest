@@ -1,4 +1,3 @@
-import React from "react";
 import style from "./Button.module.css";
 
 export const Button = ({ text, type, size, icon: Icon, onClick }) => {
@@ -9,4 +8,3 @@ export const Button = ({ text, type, size, icon: Icon, onClick }) => {
     </button>
   );
 };
-

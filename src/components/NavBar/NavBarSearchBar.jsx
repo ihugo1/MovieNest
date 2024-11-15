@@ -1,19 +1,17 @@
 import style from "./NavBarSearchBar.module.css";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { NavBarResults } from "./NavBarResults";
-import { useFetchData } from "../../hooks/useFetchData";
+import { useMovieList } from "../../hooks/useMovieList";
 
 export const NavBarSearchBar = () => {
   const [query, setQuery] = useState("");
-  const { search, fetchSearch, loading, error } = useFetchData();
+  const { movieList, loading, error, fetchMovieList } = useMovieList();
+
+  const handleOnChange = (e) => setQuery(e.target.value);
 
   useEffect(() => {
-    if(query){
-      fetchSearch(query);
-    }else{
-      fetchSearch(null);
-    }
+    fetchMovieList({ endpoint: `search/movie?query=${query}` });
   }, [query]);
 
   return (
@@ -23,7 +21,7 @@ export const NavBarSearchBar = () => {
           className={style["input"]}
           type="text"
           placeholder="Search..."
-          onChange={(event) => setQuery(event.target.value)}
+          onChange={handleOnChange}
         />
         <div className={style["icon-container"]}>
           <FaMagnifyingGlass className={style["icon"]} />
@@ -36,12 +34,10 @@ export const NavBarSearchBar = () => {
       )}
       {error && (
         <div className={style["error"]}>
-          <p p className={style["label"]}>
-            {error.message || "Something went wrong."}
-          </p>
+          <p className={style["label"]}>Error</p>
         </div>
       )}
-      {search && <NavBarResults list={search} />}
+      {movieList && <NavBarResults list={movieList} />}
     </div>
   );
 };

@@ -1,27 +1,22 @@
 import style from "./Movie.module.css";
 import { useParams } from "react-router-dom";
-import { useFetchData } from "../../hooks/useFetchData";
-import { MovieInfo } from "./MovieInfo";
-import { MovieVideos } from "./MovieVideos";
+import { useMovie } from "../../hooks/useMovie";
 import { useEffect } from "react";
+import { MovieInfo } from "./MovieInfo";
 
 export const Movie = () => {
   const { id } = useParams();
-  const { movie, videos, loading, error, fetchMovie, fetchVideos } = useFetchData();
+  const { movie, loading, error, fetchMovie } = useMovie();
 
   useEffect(() => {
-    fetchMovie(id);
-    fetchVideos(id);
+    fetchMovie({ id });
   }, [id]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error...</div>;
-  if (movie) {
-    return (
-      <div className={style["movie-info-page"]}>
-        <MovieInfo movie={movie} />
-        <MovieVideos videos={videos} />
-      </div>
-    );
-  }
+  return (
+    <div className={style["movie-info-page"]}>
+      {loading && <div>Loading...</div>}
+      {error && <div>Error!</div>}
+      {movie && <MovieInfo movie={movie} />}
+    </div>
+  );
 };

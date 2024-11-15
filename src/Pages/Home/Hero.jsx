@@ -1,22 +1,24 @@
 import style from "./Hero.module.css";
 import React, { useState, useEffect } from "react";
-import { getPopularMovies } from "../../services/api";
+import { useMovieList } from "../../hooks/useMovieList";
 
 export const Hero = () => {
-  const [movie, setMovie] = useState({});
+  const { movieList, fetchMovieList } = useMovieList();
 
   useEffect(() => {
-    const fetchMovie = async () => setMovie((await getPopularMovies())[0]);
-    fetchMovie();
+    fetchMovieList({ endpoint: `movie/popular` });
   }, []);
 
   return (
     <div className={style["hero"]}>
       <div className={style["background"]}>
-        <img
-          src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
-        />
+        {movieList[0] && (
+          <img
+            src={`https://image.tmdb.org/t/p/original/${movieList[0].backdrop_path}`}
+          />
+        )}
       </div>
+
       <div className={style["content"]}>
         <p className={style["title"]}>Explore a World of Movies</p>
         <p className={style["subtitle"]}>

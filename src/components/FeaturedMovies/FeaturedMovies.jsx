@@ -1,31 +1,31 @@
-import React, { useEffect } from "react";
 import style from "./FeaturedMovies.module.css";
+import { useMovieList } from "../../hooks/useMovieList";
 import { MovieCard } from "../MovieCard/MovieCard";
-import { useFetchData } from "../../hooks/useFetchData";
+import { useEffect } from "react";
 
 export const FeaturedMovies = ({ type }) => {
-  const { featured, loading, error, fetchFeatured } = useFetchData();
+  const { movieList, loading, error, fetchMovieList } = useMovieList();
 
   useEffect(() => {
-    fetchFeatured(type);
+    fetchMovieList({ endpoint: `movie/${type}` });
   }, []);
 
   return (
-    <section className={style["featured-movies"]}>
+    <div className={style["featured-movies"]}>
       <h3 className={style["title"]}>{type.replace(/_/g, " ")}</h3>
-      <ul className={style["container"]}>
+      <div className={style["container"]}>
+        {error && <div>Error!</div>}
         {loading && <div>Loading...</div>}
-        {error && <div>Erro fetching</div>}
-        {featured && 
-          featured.slice(0, 8).map((movie) => (
+        {movieList &&
+          movieList.map((movie) => (
             <MovieCard
               key={movie.id}
               id={movie.id}
               name={movie.title}
               poster_path={movie.poster_path}
             />
-        ))}
-      </ul>
-    </section>
+          ))}
+      </div>
+    </div>
   );
 };

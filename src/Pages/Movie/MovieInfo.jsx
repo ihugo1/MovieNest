@@ -19,7 +19,7 @@ export const MovieInfo = ({ movie }) => {
           <ul className={style["genres"]}>
             {movie.genres && movie.genres.length > 0
               ? movie.genres.map((genre) => (
-                  <li className={style["genre"]}>{genre.name}</li>
+                  <li key={genre.name} className={style["genre"]}>{genre.name}</li>
                 ))
               : null}
           </ul>

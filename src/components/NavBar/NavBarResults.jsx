@@ -6,7 +6,11 @@ export const NavBarResults = ({ list }) => {
     <ul className={style["searchbar-results"]}>
       {list && list.length > 0
         ? list.map((movie) => (
-            <a key={movie.id} className={style["searchbar-result"]}>
+            <a
+              key={movie.id}
+              className={style["searchbar-result"]}
+              href={`/movie/${movie.id}`}
+            >
               <img
                 className={style["poster"]}
                 src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}

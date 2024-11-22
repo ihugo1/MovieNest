@@ -1,8 +1,7 @@
 import style from "./MovieGrid.module.css";
 import { MovieCard } from "../../components/MovieCard/MovieCard";
-import { PagingButtons } from "../../components/PagingButtons/PagingButtons";
 
-export const MovieGrid = ({ results, paginButtons }) => {
+export const MovieGrid = ({ results }) => {
   return (
     <div className={style["movie-grid"]}>
       {!results || results.length === 0 ? (
@@ -15,7 +14,6 @@ export const MovieGrid = ({ results, paginButtons }) => {
       ) : (
         <>
           <h2 className={style["title"]}>Results:</h2>
-          {PagingButtons}
           <div className={style["movie-grid-container"]}>
             {results.map((movie) => (
               <MovieCard

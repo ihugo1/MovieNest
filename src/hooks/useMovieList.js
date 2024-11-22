@@ -5,14 +5,16 @@ export const useMovieList = () => {
   const [movieList, setMovieList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-
-  const fetchMovieList = async ({ endpoint }) => {
+  const [pages, setPages] = useState(1); 
+  
+  const fetchMovieList = async ({ endpoint, append = false }) => {
     setLoading(true);
     setError(false);
     try {
       const response = await fetch(API_BASE_URL + endpoint, FETCH_OPTIONS);
       const list = await response.json();
-      setMovieList(list.results);
+      setMovieList((prev) => (append ? [...prev, ...list.results] : list.results));
+      setPages(list.total_pages);
     } catch (error) {
       setError(true);
     } finally {
@@ -20,5 +22,6 @@ export const useMovieList = () => {
     }
   };
 
-  return { movieList, loading, error, fetchMovieList };
+  return { movieList, loading, error, pages, fetchMovieList };
 };
+
